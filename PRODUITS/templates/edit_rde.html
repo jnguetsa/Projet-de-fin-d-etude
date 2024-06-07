@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><h3>PharmaLab</h3></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+   
+
+  </div>
+</nav>
+
+{% include "conn.html" %}
+<div class="container " style="position: relative; margin-top: 5% ; width:100% ; margin-left: 25% ; " >
+  <div class="card " >
+   <div class="card-body" style="" >
+       <h5 class="text-center">Registre des entrées</h5>
+     <form action="" method= 'POST'>
+
+       {% csrf_token %}
+
+
+        <div class="form-group " style="display: flex; gap:2% ;">
+           {{ form1.as_p }}
+
+
+
+        </div>
+        <button type="submit" class="btn btn-primary " >Soumettre</button>
+
+     </form>
+   </div>
+  </div>
+</div>
+{% endblock  %}

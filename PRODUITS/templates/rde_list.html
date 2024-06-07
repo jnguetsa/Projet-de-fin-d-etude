@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="position">
+
+    <div class="container-fluid">
+      <div class="table-container" >
+
+    <table class="table "  style="position: relative; margin-top: 10%" >
+     <thead class="table-dark">
+
+         <tr>
+           <th>Date Entrée</th>
+          <th>Num PVR</th>
+           <th>Num BL</th>
+           <th>Num Lot</th>
+           <th>Qte Recu</th>
+           <th>Date de Peremption</th>
+
+           <th>Produit</th>
+           <th>Dosage</th>
+           <th>Forme Galemique</th>
+           <th>Conditionnement</th>
+           <th>Prix Unitaire</th>
+
+           <th>Modifier</th>
+           <th scope="col">Supprimer</th>
+         </tr>
+       </thead>
+       <tbody hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML swap:1s">
+         {% for entree in entre %}
+         <tr>
+           <td>{{ entree.date_entree }}</td>
+           <td>{{ entree.num_pvr }}</td>
+           <td>{{ entree.num_bl }}</td>
+           <td>{{ entree.produit.num_lot }}</td>
+
+           <td>{{ entree.qte_recue }}</td>
+
+           <td>{{ entree.produit.date_peremption }}</td>
+           <td>{{ entree.produit.nom }}</td>
+           <td>{{ entree.produit.dosage }}</td>
+           <td>{{ entree.produit.forme_galenique }}</td>
+
+           <td>{{ entree.produit.conditionnement }}</td>
+           <td>{{ entree.prix_unitaire }} Franc CFA</td>
+           <td>
+             <a class="btn btn-primary" href="{% url 'edit_rde' entree.id %}"  > Modifier</a>
+
+           </td>
+
+           <td>
+             <button type="button" class="btn btn-danger" hx-delete="{% url 'delete_rde' entree.id %}" hx-boost="true">Supprimer</button>
+           </td>
+         </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+    </div>
+    </div>
+    </div>
+
+{% endblock content %}

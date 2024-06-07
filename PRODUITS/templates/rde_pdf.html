@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Etat des stocks</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 1cm ;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 1cm;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 150%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            font-size: 12px;
+            /* Changer la direction d'écriture en vertical */
+            writing-mode: vertical-rl;
+            /* Tourner le texte de 180 degrés pour que le bas soit à gauche */
+            transform: rotate(180deg);
+            /* Centrer le texte verticalement et horizontalement */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Ajouter de la hauteur pour que le texte ne soit pas coupé */
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Registre des entrées</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Date d'entrée</th>
+                <th>Numéro PVR</th>
+                <th>Numéro BL</th>
+                <th>Quantité Reçue</th>
+                <th>Nom du Produit</th>
+                <th>Numéro de lot</th>
+                <th>Date de péremption</th>
+                <th>Conditionnement</th>
+                <th>Dosage</th>
+                <th>Forme galénique</th>
+                <th>Prix Unitaire</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in produit %}
+            <tr>
+                <td>{{ entry.date_entree }}</td>
+                <td>{{ entry.num_pvr }}</td>
+                <td>{{ entry.num_bl }}</td>
+                <td>{{ entry.qte_recue }}</td>
+                <td>{{ entry.produit.nom }}</td>
+                <td>{{ entry.produit.num_lot }}</td>
+                <td>{{ entry.produit.date_peremption }}</td>
+                <td>{{ entry.produit.conditionnement }}</td>
+                <td>{{ entry.produit.dosage }}</td>
+                <td>{{ entry.produit.forme_galenique }}</td>
+                <td>{{ entry.prix_unitaire }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+
+<nav class="navbar navbar-expand-lg  navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><h3><strong>PharmaLabs</strong></h3></a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="navbar-brand ml-5" href="{% url 'addproduct_sale' %}"><strong><h5>Produit vendu</h5></strong></a>
+
+
+
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+
+{% include "conn.html" %}
+
+
+<div class="container  pt-5 ml-3 col-5" id="p">
+    <div class="card  mt-5" >
+        <div class="card-body">
+            <h3 class="card-title">Vente</h3>
+            <form method="POST" action=" {% url 'sale' %}" >
+                {% csrf_token %}
+                {{ form1.as_p }}
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+                <div class="form-group">
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-5 ml-4 mb-5">
+                    <!-- Autre contenu de la page -->
+                </div>
+                <div class="col-md-7" id="search-container">
+                    <form id="search-form" action="{% url 'search_sales' %}" method="get"  style="display:flex; gap:5%" >
+                        <input class="form-control" type="search" name="Nom_malade" placeholder="Nom du malade" hx-get="{% url 'search_sales' %}" hx-trigger="input changed delay:500ms, search" hx-target="#search-results" hx-indicator=".htmx-indicator">
+                        <input class="form-control " type="search" name="code_recu" placeholder="Code reçu" hx-get="{% url 'search_sales' %}" hx-trigger="input changed delay:500ms, search" hx-target="#search-results" hx-indicator=".htmx-indicator">
+                        <input class="form-control " type="date" name="date_rec" placeholder="Date de réception" hx-get="{% url 'search_sales' %}" hx-trigger="input changed delay:500ms, search" hx-target="#search-results" hx-indicator=".htmx-indicator">
+                        <div class="htmx-indicator" style="display:none;">Loading...</div>
+                    </form>
+                    <div id="search-results">
+                        {% include 'sales_list.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <style>
+            #search-container {
+                position: relative;
+                bottom: 350px;
+                margin-left: 42%; 
+            }
+            #p{
+                position: relative;
+                bottom:  -70px;
+            }
+        </style>
+        
+
+{% endblock content %}
+ 

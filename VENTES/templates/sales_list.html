@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<table class="table table-bordered table-striped "style="margin-top: 2%">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Code de la recette</th>
+            <th scope="col">Date de la recette</th>
+            <th scope="col">Nom du malade</th>
+            <th scope="col">Produits</th>
+            <th scope="col">Prix total</th>
+            <th scope="col">Imprimer</th>
+            <th scope="col">Supprimer</th>
+        </tr>
+    </thead>
+    <tbody  hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML swap:1s">
+        {% for sale in sales %}
+            <tr>
+                <td>{{ sale.code_recu }}</td>
+                <td>{{ sale.date_rec }}</td>
+                <td>{{ sale.Nom_malade }}</td>
+                <td>
+                    {% for produit_vente in sale.produit.all %}
+                        {{ produit_vente.produit.nom }} - {{ produit_vente.produit.conditionnement }} - {{ produit_vente.produit.dosage }} - {{ produit_vente.produit.forme_galenique }} - {{ produit_vente.produit.date_peremption }} 
+                        {% if not forloop.last %}<br>{% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ sale.prix_total }} FCFA</td>
+                <td>
+                  <a href="{% url 'generate_sale_pdf' sale.id %}" class="btn btn-primary">Imprimer</a>
+
+                </td>
+            <td>
+                <button type="button" hx-delete="{% url 'delete_sale' sale.id %}" hx-boost="true" class="btn btn-danger" >Suprimer</button>
+
+            </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+
+{% endblock content %}
+
+
+
+

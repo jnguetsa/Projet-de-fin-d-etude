@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+
+
+  <nav class="navbar navbar-expand-lg  navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><h3><strong>PharmaLabs</strong></h3></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active" aria-current="page" href="{% url 'gestionnaire' %}">RDE</a>
+
+        </div>
+        <div class="navbar-nav">
+
+        </div>
+      </div>
+
+
+    </div>
+  </nav>
+
+{% include "conn.html" %}
+
+
+<div class="d-flex justify-content-center align-items-center vh-100 pb-5">
+  <div class="card  mb-5" style="width: 65rem; position:relative; margin-top: -15%; height: 22%; ">
+    <div class="card-body">
+        <form method="POST">
+
+            {% csrf_token %}
+                <h3><strong>Ajouter un produit</strong></h3>
+                  
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    {{ form.num_lot }}
+                </div>
+                <div class="form-group col-md-3">
+                    {{ form.date_peremption }}
+                </div>
+                <div class="form-group col-md-3">
+                    {{ form.nom }}
+                </div>
+                <div class="form-group col-md-3">
+                    {{ form.code }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    {{ form.conditionnement }}
+                </div>
+                <div class="form-group col-md-3">
+                    {{ form.dosage }}
+                </div>
+                <div class="form-group col-md-3">
+                    {{ form.forme_galenique }}
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+
+            <div class="d-flex justify-content-center" style="margin-top:-6% ">
+                <button type="submit" class="btn btn-primary " style=" position:relative; width: 24% ; margin-left: 75%;"><h5>Ajouter</h5></button>
+            </div>
+
+        </form>
+    </div>
+</div>
+<a href=""   class="btn btn-info mb-4">Telecharger</a>
+
+
+  <div class="search" style="position:absolute; margin-bottom:-15%; display:flex; gap:10% ; margin-left:-35% ; margin-top: -17% ">
+    <h3><strong>Recherches</strong></h3>
+
+    <input class="form-control col-2 " type="text">
+    <input class="form-control col-2" type="text">
+    <input class="form-control col-2" type="text">
+    <input class="form-control col-2" type="text">
+  </div>
+</div>
+
+
+
+
+  <div class="container">
+    <div class="table-container " style="position: relative; margin-top:-35%">
+      <table class="table float-bottom">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Num_lot</th>
+            <th scope="col">Date de peremption</th>
+
+            <th scope="col">Nom</th>
+            <th scope="col">Code</th>
+            <th scope="col">Conditionnement</th>
+            <th scope="col">Dosage</th>
+            <th scope="col">Forme Galénique</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in product %}
+          <tr>
+            <td>{{ product.num_lot }}</td>
+            <td>{{ product.date_peremption }}</td>
+
+            <td>{{ product.nom }}</td>
+            <td>{{ product.code }}</td>
+            <td>{{ product.conditionnement }}</td>
+            <td>{{ product.dosage }}</td>
+            <td>{{ product.forme_galenique }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+{% endblock content %}

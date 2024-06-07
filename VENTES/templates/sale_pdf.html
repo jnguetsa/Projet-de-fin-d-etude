@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Détails de la vente</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Détails de la vente</h2>
+{% comment %} 
+    <table>
+        <tr>
+            <th>Pharmacien</th>
+            <td>{{ sale.pharmacien }}</td>
+        </tr>
+        <tr>
+            <th>Date de la vente</th>
+            <td>{{ sale.date_rec }}</td>
+        </tr>
+        <tr>
+            <th>Nom du patient</th>
+            <td>{{ sale.Nom_malade }}</td>
+        </tr>
+        <tr>
+            <th>Code de la vente</th>
+            <td>{{ sale.code_recu }}</td>
+        </tr>
+    </table> {% endcomment %}
+
+     <p>Code de la facture: <strong> {{ sale.code_recu }} </strong></p>
+    <table>
+        <tr>
+            <th>Nom du produit</th>
+            <th>Conditionnement</th>
+            <th>Forme galénique</th>
+            <th>Date de péremption</th>
+        </tr>
+        {% for produit in sale.produit.all %}
+        <tr>
+            <td style="text-align: left;">
+              {{ produit.produit.nom }}
+              {% comment %} <br>
+              <span style="font-size: 0.8em;">Code: {{ produit.produit.code }}</span> {% endcomment %}
+            </td>
+            <td style="text-align: left;">{{ produit.produit.conditionnement }}</td>
+            <td style="text-align: left;">{{ produit.produit.forme_galenique }}</td>
+            <td style="text-align: right;">{{ produit.produit.date_peremption }}</td>
+          </tr>
+          
+        {% endfor %}
+    </table>
+
+    {% comment %} <h2>Total de la vente</h2> {% endcomment %}
+
+    <table>
+        <tr>
+            <th>Total</th>
+            <td>{{ sale.prix_total }} Franc CFA</td>
+        </tr>
+    </table>
+
+</body>
+</html>

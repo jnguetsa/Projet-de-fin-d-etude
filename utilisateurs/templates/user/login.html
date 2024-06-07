@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<!--                      Nav bar                      -->
+
+<div class="nav-p">
+  <nav class="navbar navbar-expand-lg navbar-dark  bg-dark">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#"><h3><strong>PharmaLabs</strong></h3></a>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+
+        </form>
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+{% if error %}
+   <div class="container container-fluid d-flex justify-content-center">
+    <div class="alert alert-warning alert-dismissible fade show w-100 mt-4" role="alert">
+
+      {{ error }}
+    <button type="button" class="btn-close ms-2" data-bs-dismiss="alert" aria-label="Close"></button>
+
+    </div>
+
+  </div> 
+
+
+{% endif %}
+
+                     
+<div class="container mt-5">
+  <div class="row justify-content-center">
+      <div class="col-md-6">
+          <div class="card">
+              <div class="card-body">
+                <h2 class="text-center mb-4"> <strong>Login</strong> </h2>
+
+
+
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="text" name="username" class="form-control" placeholder="Entrer votre nom d'utilisateur" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" name="password" class="form-control" placeholder="Entrez votre mot de passe" required>
+                    </div>
+                    <div class="mb-3">
+
+                        <button type="submit" class="btn btn-primary w-100     hx-post="{% url 'home' %}" hx-target="#comments" hx-swap="beforeend"">
+                          <h6><strong>Se Connecter</strong></h6></button>
+                    </div>
+                </form>
+                <h5 class="text-center" >S'enregistrer <a href="register" class="btn btn-primary  col-3 "><strong  >REGISTER</strong></a></h5>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+{% endblock content %}

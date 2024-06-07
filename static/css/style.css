@@ -1,0 +1,39 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+.card-body{
+    position: relative;
+    display: grid;
+}
+.custom-form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust gap as needed */
+}
+
+.custom-form-row .form-group {
+    flex: 1;
+    min-width: 150px; /* Adjust min-width as needed */
+}
+
+.custom-form-row .form-group input,
+.custom-form-row .form-group select {
+    width: 100%;
+}
+
+.cp{
+    position: relative;
+
+    margin-top: 6%;
+}
+
+.seach input {
+    position: relative;
+
+    top:  100 px;
+}
+
+

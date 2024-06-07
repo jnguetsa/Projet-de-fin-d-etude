@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><strong><h2>PharmaLabs</h2></strong></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <a class="navbar-brand" href="{% url 'sale' %}"><strong><h5>Ventes</h5></strong></a>
+
+    </div>
+  </div>
+</nav>
+
+{% include "conn.html" %}
+<div class="container">
+    <div class="card  mt-4 ml-4">
+     <div class="card-body ">
+         <h4 class="card-title"> Ajouter une vendu</h4>
+       <form  method= 'POST'>
+         {% csrf_token %}
+          <div class="form-group">
+             {{ form.as_p }}
+          </div>
+         <button type="submit" class="btn btn-primary ">Soumettre</button>
+  
+       </form>
+     </div>
+    </div>
+  
+  <form method="POST"  style="position: relative; display:flex;">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col">
+            {{ form.num_lot }}
+            {{ form.date_peremption }}
+            {{ form.nom }}
+            {{ form.code }}
+        </div>
+        <div class="col">
+            {{ form.conditionnement }}
+            {{ form.dosage }}
+            {{ form.forme_galenique }}
+        </div>
+    </div>
+    {% comment %} <button type="submit" class="btn btn-primary mt-3">Submit</button> {% endcomment %}
+</form>
+
+
+  <div class="container">
+    <div class="table-container mt-4 ">
+      <table class="table float-bottom">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Num_lot</th>
+            <th scope="col">Date de peremption</th>
+
+            <th scope="col">Nom</th>
+            <th scope="col">Code</th>
+            <th scope="col">Conditionnement</th>
+            <th scope="col">Dosage</th>
+            <th scope="col">Forme Galénique</th>
+            <th scope="col">Quantités</th>
+            <th scope="col">Prix Unitaire</th>
+            <th scope="col">Statut</th>
+            <th scope="col">Modifier</th>
+
+            <th scope="col">Supprimer</th>
+
+
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in product %}
+          <tr>
+            <td>{{ product.produit.num_lot }}</td>
+            <td>{{ product.produit.date_peremption }}</td>
+
+            <td>{{ product.produit.nom }}</td>
+            <td>{{ product.produit.code }}</td>
+            <td>{{ product.produit.conditionnement }}</td>
+            <td>{{ product.produit.dosage }}</td>
+            <td>{{ product.produit.forme_galenique }}</td>
+            <td>{{ product.qte }}</td>
+            <td>{{ product.prix_unitaire }}</td>
+            <td>
+              {{ product.annulees }}   
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                
+                </label>
+              </div>
+              <td>
+                {% comment %} <a href="{% url 'edit_rde' entree.id %}" class="btn btn-primary">Modifier</a> {% endcomment %}
+                <a  class="btn btn-primary">Edit</a>
+       
+              </td>
+              <td>
+                <button type="button" class="btn btn-danger"  hx-boost="true">Supprimer</button>
+              </td>
+            </td>
+
+
+
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
+
+
+
+
+
+
+
+
